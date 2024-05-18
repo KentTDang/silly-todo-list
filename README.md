@@ -44,3 +44,13 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+## Connecting with Firebase
+
+1. Navigate to the project within the [Firebase Console](https://console.firebase.google.com)
+1. Select the `silly-todo-app`
+1. Scroll down to the **Your Apps** section
+1. Copy/🍝 the `firebaseConfig` contents into the `src/.firebase.json` file (note it will not exist prior to this step)
+   - Note: there is an example in `src/.firebase.example.json`
+	 - Note: **DO NOT COMMIT THE `src/.firebase.json` file**
+1. Start building 🤩
