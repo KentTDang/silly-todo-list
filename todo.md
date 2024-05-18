@@ -1,4 +1,4 @@
-- [ ] User Input - simply tack task no metadata
+   - [x] User Input - simply tack task no metadata
 - [ ] Display Task - table
 - [ ] Delete or mark when they're done
 - [ ] Be able to edit the task 
