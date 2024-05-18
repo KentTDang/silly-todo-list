@@ -4,4 +4,5 @@
 - [ ] Be able to edit the task 
 - [ ] Users can only see their own task
 - [ ] User auth
+   - [x] Signin
 - [ ] Create each collection for them based off user
