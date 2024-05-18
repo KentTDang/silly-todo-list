@@ -1,0 +1,7 @@
+- [ ] User Input - simply tack task no metadata
+- [ ] Display Task - table
+- [ ] Delete or mark when they're done
+- [ ] Be able to edit the task 
+- [ ] Users can only see their own task
+- [ ] User auth
+- [ ] Create each collection for them based off user
