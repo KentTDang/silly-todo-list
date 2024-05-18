@@ -5,11 +5,13 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const provider = new GoogleAuthProvider();
 
 export const SignIn = (): JSX.Element => {
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const auth = getAuth();
   auth.useDeviceLanguage();
 
@@ -18,6 +20,7 @@ export const SignIn = (): JSX.Element => {
 
     try {
       await signInWithPopup(auth, provider);
+      navigate("/");
     } catch (error: any) {
       if ("code" in error && "message" in error) {
         const authError = error as AuthError;
