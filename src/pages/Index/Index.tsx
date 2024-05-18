@@ -3,6 +3,7 @@ import { CreateTaskForm } from "../../components/taskForm";
 import { firestore } from "../../firebase";
 import { getAuth } from "firebase/auth";
 import { useEffect, useState } from "react";
+import TaskTable from "../../components/TaskTable";
 
 export const Index = (): JSX.Element => {
   const [tasks, setTasks] = useState<any[]>([]);
@@ -23,9 +24,9 @@ export const Index = (): JSX.Element => {
   return (
     <div>
       <CreateTaskForm />
-      {tasks.map((task, i) => (
-        <p key={`task-${i}`}>{JSON.stringify(task)}</p>
-      ))}
+
+      <TaskTable incompleteTasks={tasks} completeTasks={[]}/>
     </div>
   );
 };
+  

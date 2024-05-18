@@ -2,7 +2,7 @@
 - [ ] Display Task - table
 - [ ] Delete or mark when they're done
 - [ ] Be able to edit the task 
-- [ ] Users can only see their own task
+   - [x] Users can only see their own task
 - [ ] User auth
    - [x] Signin
 - [ ] Create each collection for them based off user
