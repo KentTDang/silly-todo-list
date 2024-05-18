@@ -1,8 +1,7 @@
-   - [x] User Input - simply tack task no metadata
-- [ ] Display Task - table
-- [ ] Delete or mark when they're done
-- [ ] Be able to edit the task 
+- [x] User Input - simply tack task no metadata
+- [x] Display Task - table
+- [x] Delete or mark when they're done
+- [x] Be able to edit the task 
    - [x] Users can only see their own task
-- [ ] User auth
-   - [x] Signin
-- [ ] Create each collection for them based off user
+- [x] User auth
+- [x] Create each collection for them based off user
