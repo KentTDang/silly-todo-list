@@ -1,33 +1,47 @@
-import { addDoc, collection } from 'firebase/firestore'
-import { firestore } from '../firebase'
+import { addDoc, collection } from "firebase/firestore";
+import { firestore } from "../firebase";
+import { getAuth } from "firebase/auth";
 
 export const CreateTaskForm = (): JSX.Element => {
+  const { currentUser } = getAuth();
 
-  const collectionRef = collection(firestore, "todo")
+  const incompleteCollectionRef = collection(
+    firestore,
+    currentUser!.uid,
+    "tasks",
+    "incomplete"
+  );
+
   return (
     <form
-      onSubmit={async(e) => {
-
+      onSubmit={async (e) => {
         e.preventDefault();
 
         // Create Form Data
         const data = new FormData(e.currentTarget);
         const task = data.get("task");
 
-        // Transform the data to an object 
-        const doc = { task }  
-
-        try {
-          console.log("Hit the try");
-          const uploadTask = await addDoc(collectionRef, doc);
-        } catch(err) {
-          throw(err)
+        if (task === undefined || task?.toString().length === 0) {
+          return;
         }
 
+        // Transform the data to an object
+        const doc = { task };
+
+        try {
+          const uploadTask = await addDoc(incompleteCollectionRef, doc);
+        } catch (err) {
+          throw err;
+        }
       }}
     >
-      <input type="text" name="task" required placeholder='Enter a Task'></input>
+      <input
+        type="text"
+        name="task"
+        required
+        placeholder="Enter a Task"
+      ></input>
       <button>Submit</button>
     </form>
-  )
-}
+  );
+};
