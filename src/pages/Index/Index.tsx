@@ -4,42 +4,47 @@ import { firestore } from "../../firebase";
 import { getAuth } from "firebase/auth";
 import { useEffect, useState } from "react";
 import TaskTable from "../../components/TaskTable";
-import { Task, Tasks } from "../../types";
+import { Tasks } from "../../types";
 
 export const Index = (): JSX.Element => {
   const [incompleteTasks, setIncompleteTasks] = useState<Tasks>({});
   const [completeTasks, setCompleteTasks] = useState<Tasks>({});
 
-  const incompleteCollectionRef = collection(
-    firestore,
-    getAuth().currentUser!.uid,
-    "tasks",
-    "incomplete"
-  );
-  const completeCollectionRef = collection(
-    firestore,
-    getAuth().currentUser!.uid,
-    "tasks",
-    "complete"
-  );
+  const loadTasks = async (props: {
+    state: "complete" | "incomplete";
+  }): Promise<Tasks> => {
+    const collectionRef = collection(
+      firestore,
+      getAuth().currentUser!.uid,
+      "tasks",
+      props.state
+    );
+    const { docs } = await getDocs(collectionRef);
+    return docs.reduce(
+      (tasks, doc) => Object.assign(tasks, { [doc.id]: doc.data() }),
+      {}
+    );
+  };
+
+  const fetchTableData = async () => {
+    try {
+      setIncompleteTasks(await loadTasks({ state: "incomplete" }));
+    } catch (error) {
+      // TODO handle error
+      console.error(error);
+    }
+
+    try {
+      setCompleteTasks(await loadTasks({ state: "complete" }));
+    } catch (error) {
+      // TODO: handle error
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
-    (async () => {
-      const { docs: incompleteDocs } = await getDocs(incompleteCollectionRef);
-      let _incompleteTasks: Tasks = {};
-      incompleteDocs.forEach(
-        (doc) => (_incompleteTasks[doc.id] = doc.data() as Task)
-      );
-      setIncompleteTasks(_incompleteTasks);
-
-      const { docs: completeDocs } = await getDocs(completeCollectionRef);
-      let _completeTasks: Tasks = {};
-      completeDocs.forEach(
-        (doc) => (_completeTasks[doc.id] = doc.data() as Task)
-      );
-      setCompleteTasks(_completeTasks);
-    })();
-  }, [incompleteTasks] || [completeTasks]);
+    fetchTableData();
+  }, []);
 
   return (
     <div>
