@@ -5,3 +5,5 @@
    - [x] Users can only see their own task
 - [x] User auth
 - [x] Create each collection for them based off user
+- [ ] On upload task, rerender task list in firebase
+- [ ] On delete task, rerender task list in firebase
