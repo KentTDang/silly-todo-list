@@ -9,6 +9,7 @@ import { Task, Tasks } from "../../types";
 export const Index = (): JSX.Element => {
   const [incompleteTasks, setIncompleteTasks] = useState<Tasks>({});
   const [completeTasks, setCompleteTasks] = useState<Tasks>({});
+
   const incompleteCollectionRef = collection(
     firestore,
     getAuth().currentUser!.uid,
@@ -38,7 +39,7 @@ export const Index = (): JSX.Element => {
       );
       setCompleteTasks(_completeTasks);
     })();
-  }, []);
+  }, [incompleteTasks] || [completeTasks]);
 
   return (
     <div>
